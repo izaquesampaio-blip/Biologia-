@@ -1,0 +1,340 @@
+/* PALETA NOIR / RETRÔ DOS ANOS 1960 */
+:root {
+    --bg-escuro: #111413;
+    --painel-cinza: #1d2220;
+    --borda-musgo: #2e3b33;
+    --amarelo-velho: #cfb35c;
+    --texto-principal: #dcdfdc;
+    --texto-mutado: #6e7a73;
+    
+    /* Cores do Bloco de Notas (Estilo Papel) */
+    --papel-bg: #dfd6be;
+    --papel-texto: #2a2e2b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-escuro);
+    color: var(--texto-principal);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* CABEÇALHO */
+header {
+    background-color: #090c0b;
+    border-bottom: 2px solid var(--borda-musgo);
+    padding: 20px 10px;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+header h1 {
+    font-family: 'Georgia', serif;
+    color: var(--amarelo-velho);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+}
+
+header p {
+    color: var(--texto-mutado);
+    font-size: 0.9rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* LAYOUT PRINCIPAL RESPONSIVO */
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    flex: 1;
+}
+
+@media (min-width: 850px) {
+    .container {
+        grid-template-columns: 1.1fr 0.9fr;
+    }
+}
+
+/* COLUNA ESQUERDA: CENA DO CRIME */
+.cena-crime-col {
+    background-color: #161a18;
+    border: 2px solid var(--borda-musgo);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+    min-height: 450px;
+}
+
+.painel-header {
+    background-color: #0e1210;
+    padding: 10px 15px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--amarelo-velho);
+    border-bottom: 1px solid var(--borda-musgo);
+}
+
+.mapa-interativo {
+    position: relative;
+    flex: 1;
+    background: radial-gradient(circle at center, #1b2420 0%, #0d1210 100%);
+}
+
+/* Zonas Clicáveis (Hotspots) */
+.hotspot {
+    position: absolute;
+    background-color: rgba(207, 179, 92, 0.05);
+    border: 1px dashed var(--amarelo-velho);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease-in-out;
+}
+
+.hotspot:hover {
+    background-color: rgba(207, 179, 92, 0.2);
+    border: 1px solid #fff;
+    box-shadow: 0 0 12px var(--amarelo-velho);
+    transform: scale(1.04);
+}
+
+.hotspot-indicador {
+    color: var(--amarelo-velho);
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.hotspot.descoberto {
+    border: 1px solid #4a6351;
+    background-color: rgba(74, 99, 81, 0.15);
+}
+
+.hotspot.descoberto .hotspot-indicador {
+    color: #5c8269;
+}
+
+/* Coordenadas e tamanhos simulando o Point-and-Click */
+#pista-corpos { top: 45%; left: 15%; width: 150px; height: 90px; }
+#pista-mascaras { top: 25%; left: 52%; width: 60px; height: 45px; }
+#pista-garrafa { top: 60%; left: 45%; width: 50px; height: 60px; }
+#pista-caderneta { top: 40%; left: 70%; width: 55px; height: 50px; }
+
+.instrucao-rodape {
+    background-color: #0e1210;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--texto-mutado);
+    border-top: 1px solid var(--borda-musgo);
+}
+
+/* COLUNA DIREITA: PAINEL DO DETETIVE */
+.painel-detetive-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bloco-detetive {
+    background-color: var(--painel-cinza);
+    border: 1px solid var(--borda-musgo);
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.bloco-detetive h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: var(--amarelo-velho);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* INVENTÁRIO */
+.inventario-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.slot {
+    background-color: #121514;
+    border: 1px solid #29302c;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--texto-mutated);
+    text-align: center;
+    padding: 4px;
+}
+
+.slot.coletado {
+    border: 1px solid var(--amarelo-velho);
+    color: var(--texto-principal);
+    background-color: #262e2a;
+    font-weight: bold;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+}
+
+/* BLOCO DE NOTAS (PAPEL ANTIGO) */
+.documento-papel {
+    background-color: var(--papel-bg);
+    color: var(--papel-texto);
+    font-family: 'Georgia', serif;
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.5);
+    min-height: 220px;
+}
+
+.nota-inicial {
+    font-family: -apple-system, sans-serif;
+    color: #5c615d;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.entrada-pista {
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    animation: surgimentoSuave 0.4s ease forwards;
+}
+
+.transcricao-real {
+    background-color: rgba(0, 0, 0, 0.04);
+    border-left: 3px solid #852f23;
+    padding-left: 10px;
+    margin-top: 8px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.divisor-papel {
+    border: 0;
+    border-top: 1px dashed #9e957f;
+    margin: 15px 0;
+}
+
+.pergunta-final {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.opcao-teoria {
+    display: block;
+    font-family: -apple-system, sans-serif;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.opcao-teoria input {
+    margin-right: 6px;
+}
+
+.btn-enviar {
+    background-color: var(--papel-texto);
+    color: var(--papel-bg);
+    border: none;
+    padding: 8px 12px;
+    width: 100%;
+    margin-top: 5px;
+    cursor: pointer;
+    font-family: -apple-system, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-enviar:hover {
+    background-color: #3b423e;
+}
+
+/* CAIXA DE DESFECHO */
+.bloco-desfecho {
+    background-color: #0b0d0c;
+    border: 1px solid var(--amarelo-velho);
+    border-radius: 4px;
+    padding: 15px;
+    animation: surgimentoSuave 0.6s ease forwards;
+}
+
+.bloco-desfecho h4 {
+    color: var(--amarelo-velho);
+    font-family: 'Georgia', serif;
+    margin-bottom: 10px;
+}
+
+.bloco-desfecho p {
+    font-size: 0.85rem;
+    color: #b1b9b4;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* RODAPÉ */
+footer {
+    background-color: #090c0b;
+    border-top: 1px solid var(--borda-musgo);
+    padding: 15px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: var(--texto-mutado);
+}
+
+.btn-reset {
+    background: transparent;
+    border: 1px solid var(--borda-musgo);
+    color: var(--texto-mutado);
+    padding: 4px 10px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.btn-reset:hover {
+    border-color: #8c3223;
+    color: #f7a194;
+}
+
+/* ANIMAÇÃO */
+@keyframes surgimentoSuave {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
