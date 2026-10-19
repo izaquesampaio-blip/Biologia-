@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operação Morro do Vintém — Jogo de Detetive</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. CABEÇALHO -->
+    <header>
+        <div class="header-container">
+            <h1>Operação Morro do Vintém</h1>
+            <p>Niterói, RJ — 1966. Dois técnicos em eletrônica foram encontrados mortos sob circunstâncias misteriosas. Investigue a cena do crime.</p>
+        </div>
+    </header>
+
+    <!-- 2. ÁREA PRINCIPAL -->
+    <main class="container">
+        
+        <!-- COLUNA ESQUERDA: CENA DO CRIME -->
+        <section class="cena-crime-col">
+            <div class="painel-header">Cena do Crime (Topo do Morro)</div>
+            <div class="mapa-interativo">
+                <!-- Pistas Ocultas do Caso -->
+                <div id="pista-corpos" class="hotspot" title="Examinar corpos" onclick="investigarPista(1)">
+                    <span class="hotspot-indicador">?</span>
+                </div>
+                <div id="pista-mascaras" class="hotspot" title="Objeto metálico" onclick="investigarPista(2)">
+                    <span class="hotspot-indicador">?</span>
+                </div>
+                <div id="pista-garrafa" class="hotspot" title="Verificar objeto no solo" onclick="investigarPista(3)">
+                    <span class="hotspot-indicador">?</span>
+                </div>
+                <div id="pista-caderneta" class="hotspot" title="Folhear anotações" onclick="investigarPista(4)">
+                    <span class="hotspot-indicador">?</span>
+                </div>
+            </div>
+            <div class="instrucao-rodape">
+                Clique nos elementos suspeitos espalhados pelo topo do morro para colher evidências.
+            </div>
+        </section>
+
+        <!-- COLUNA DIREITA: PAINEL DO DETETIVE -->
+        <section class="painel-detetive-col">
+            
+            <!-- Inventário -->
+            <div class="bloco-detetive">
+                <h3>Maleta de Evidências (Inventário)</h3>
+                <div class="inventario-grid">
+                    <div id="slot-1" class="slot">Vazio</div>
+                    <div id="slot-2" class="slot">Vazio</div>
+                    <div id="slot-3" class="slot">Vazio</div>
+                    <div id="slot-4" class="slot">Vazio</div>
+                </div>
+            </div>
+
+            <!-- Bloco de Notas / Detalhes das Pistas -->
+            <div class="bloco-detetive">
+                <h3>Bloco de Notas da Investigação</h3>
+                <div id="bloco-notas" class="documento-papel">
+                    <div id="notas-dinamicas">
+                        <p class="nota-inicial">Nenhuma evidência analisada ainda. Vasculhe o Morro do Vintém ao lado...</p>
+                    </div>
+
+                    <!-- Condição de Vitória: Formulário Final -->
+                    <div id="formulario-conclusao" style="display: none;">
+                        <hr class="divisor-papel">
+                        <p class="pergunta-final"><strong>Qual é a sua conclusão sobre o mistério?</strong></p>
+                        <form onsubmit="emitirRelatorioFinal(event)">
+                            <label class="opcao-teoria">
+                                <input type="radio" name="teoria" value="A" required> 
+                                A) Sobrecarga por experimento científico/UFOs.
+                            </label>
+                            <label class="opcao-teoria">
+                                <input type="radio" name="teoria" value="B"> 
+                                B) Envenenamento por golpe financeiro de terceiros.
+                            </label>
+                            <label class="opcao-teoria">
+                                <input type="radio" name="teoria" value="C"> 
+                                C) Incidente com radiação/espiritismo.
+                            </label>
+                            <button type="submit" class="btn-enviar">Enviar Relatório Oficial</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caixa de Desfecho Final (Histórica) -->
+            <div id="desfecho-historico" class="bloco-desfecho" style="display: none;">
+                <h4>Caso Arquivado sem Solução</h4>
+                <p>O caso real de 1966 permanece um mistério até hoje. Manoel Pereira da Cruz e Miguel José Viana saíram de Campos dos Goytacazes com dinheiro para comprar um carro e componentes de trabalho. Foram vistos pela última vez bebendo água mineral em um bar próximo.</p>
+                <p>Os corpos foram localizados dias depois, perfeitamente trajados de terno e capa de chuva, sem nenhum sinal mecânico de violência física. O avançado estado de decomposição inviabilizou os testes toxológicos da época, alimentando teorias que misturam misticismo, golpes e experiências secretas.</p>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- 3. RODAPÉ -->
+    <footer>
+        <p> True Crime Brasileiro: O Mistério das Máscaras de Chumbo (1966).</p>
+        <button class="btn-reset" onclick="reiniciarInvestigacao()">Reiniciar Caso</button>
+    </footer>
+
+    <script src="game.js"></script>
+</body>
+</html>
+
